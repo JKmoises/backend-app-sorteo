@@ -1,2 +1,129 @@
-# backend-app-sorteo
-Backend de App de sorteos de Code Quest de Devtalles
+# Backend App Sorteos
+
+Backend de App de sorteos de Code Quest de Devtalles que incluye API REST de sorteos, autenticación y más.
+
+
+## Pasos y comandos para levantar backend:
+Los pasos importantes para que nuestro backend funcione son agregar las variables de entorno, crear nuestra base de dato NoSQL local, poblar las colecciones de esta y correr el servidor local.
+
+
+
+#### Configurar nuestras variables de entorno:
+- Se debe crear el archivo `.env` y dentro de este pegar todas las variables de entorno del archivo `.env.template`.
+
+#### Montar base de datos MongoDB:
+```docker-compose up```
+
+#### Poblar base de datos con datos de prueba:
+```npm run seed```
+
+#### Correr servidor local:
+```npm run dev```
+
+#### Ejecutar pruebas unitarias:
+- ```npm run test```
+- ```npm run test:watch```
+
+## Tecnologías:
+Para el desarrollo backend se usaron principalmente las siguientes tecnologías:
+
+- **NodeJS:** Entorno de ejecución para crear nuestro backend.
+- **Express:** Framework de _NodeJS_.
+- **Typescript:** Superset de _Javascript_ para tipado estático.
+- **MongoDB:** Base de datos NoSQL.
+- **Docker:** Gestor de contenedores para montar base de datos de _Mongo_.
+- **Jest:** Biblioteca para _Unit testing_ en nuestro backend.
+___
+
+![Tecnologias](https://skillicons.dev/icons?i=nodejs,express,typescript,mongodb,docker,jest)
+
+
+## Endpoints:
+El endpoint base en nuestro servidor local es: 
+```
+http://localhost:3000/api
+```
+
+### Autenticación:
+
+- #### **Registrar usuario:**
+  POST - ```/api/auth/login``` 
+  
+  ##### Request Body:
+  ```
+  {
+    name: string,
+    email: string,
+    password: string
+  }
+  ```
+
+- #### **Autenticar usuario:**
+  POST - ```/api/auth/register```
+
+  ##### Request Body:
+  ```
+  {
+    email: string,
+    password: string
+  }
+  ```
+
+- #### **Validar email de usuario:**
+  GET - ```/api/auth/validate-email/{token}```
+
+  #### Parametros:
+  **token** (path): Token de usuario registrado.
+
+### Sorteo:
+
+- #### **Leer todos los sorteos:**
+  GET - ```/api/raffle/```
+
+- #### **Leer un sorteo:**
+  GET - ```/api/raffle/{id}```
+
+  #### Parametros:
+  **id** (path): Id de sorteo a mostrar.
+
+
+- #### **Crear un sorteo:**
+  POST - ```/api/raffle/```
+
+  ##### Request Body:
+  ```
+  {
+    name: string,
+    description: string,
+    active: boolean,
+    createAt: Date,
+    endAt: Date,
+    prize: string (mongoId),
+  }
+  ```
+
+- #### **Actualizar un sorteo:**
+  PUT - ```/api/raffle/{id}```
+
+  ##### Request Body:
+   ```
+  {
+    name: string,
+    description: string,
+    endAt: Date,
+    prize: string (mongoId),
+  }
+  ```
+
+  #### Parametros:
+  **id** (path): Id de sorteo a actualizar.
+
+- #### **Eliminar un sorteo:**
+  DELETE - ```/api/raffle/{id}```
+
+  #### Parametros:
+  **id** (path): Id de sorteo a eliminar.
+
+
+
+
