@@ -2,27 +2,40 @@
 
 Backend de App de sorteos de Code Quest de Devtalles que incluye API REST de sorteos, autenticación y más.
 
+___
 
 ## Pasos y comandos para levantar backend:
 Los pasos importantes para que nuestro backend funcione son agregar las variables de entorno, crear nuestra base de dato NoSQL local, poblar las colecciones de esta y correr el servidor local.
-
-
 
 #### Configurar nuestras variables de entorno:
 - Se debe crear el archivo `.env` y dentro de este pegar todas las variables de entorno del archivo `.env.template`.
 
 #### Montar base de datos MongoDB:
-```docker-compose up```
+```
+docker-compose up
+```
 
 #### Poblar base de datos con datos de prueba:
-```npm run seed```
+```
+npm run seed
+```
 
 #### Correr servidor local:
-```npm run dev```
+```
+npm run dev
+```
 
 #### Ejecutar pruebas unitarias:
-- ```npm run test```
-- ```npm run test:watch```
+##### Sin hot reload:
+```
+npm run test
+```
+##### Con hot reload:
+```
+npm run test:watch
+```
+
+___
 
 ## Tecnologías:
 Para el desarrollo backend se usaron principalmente las siguientes tecnologías:
@@ -33,10 +46,10 @@ Para el desarrollo backend se usaron principalmente las siguientes tecnologías:
 - **MongoDB:** Base de datos NoSQL.
 - **Docker:** Gestor de contenedores para montar base de datos de _Mongo_.
 - **Jest:** Biblioteca para _Unit testing_ en nuestro backend.
-___
 
 ![Tecnologias](https://skillicons.dev/icons?i=nodejs,express,typescript,mongodb,docker,jest)
 
+___
 
 ## Endpoints:
 El endpoint base en nuestro servidor local es: 
