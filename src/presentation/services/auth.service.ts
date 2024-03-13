@@ -69,8 +69,8 @@ export class AuthService {
 
     const link = `${envs.WEBSERVICE_URL}/auth/validate-email/${token}`;
     const htmlBody = /*html*/ `
-      <h1>Verifica ty email</h1>
-      <p>Haz click en el siguiente enlace para verificar tu email</p>
+      <h1>Verifica tu email</h1>
+      <p>Haz click en el siguiente enlace para verificar tu email.</p>
       <a href="${link}">Valida tu email: ${email}</a>
     `;
 

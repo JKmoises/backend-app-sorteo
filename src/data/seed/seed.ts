@@ -1,4 +1,6 @@
 import { envs } from "../../config";
+import { PrizeModel } from "../mongo/models/prize-model";
+import { RaffleModel } from "../mongo/models/raffle-model";
 import { UserModel } from "../mongo/models/user.model";
 import { MongoDatabase } from "../mongo/mongo-database";
 import { seedData } from "./data";
@@ -18,8 +20,12 @@ import { seedData } from "./data";
 async function main() {
 
   await Promise.all([
-    await UserModel.deleteMany(),
-    await UserModel.insertMany(seedData.users),
+    UserModel.deleteMany(),
+    RaffleModel.deleteMany(),
+    PrizeModel.deleteMany(),
+    UserModel.insertMany(seedData.users),
+    RaffleModel.insertMany(seedData.raffles),
+    PrizeModel.insertMany(seedData.prizes),
   ]);
 
   console.log("SEEDED");
