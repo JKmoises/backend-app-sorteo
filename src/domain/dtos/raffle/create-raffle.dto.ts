@@ -13,7 +13,7 @@ export class CreateRaffleDto {
     const {
       name,
       description,
-      active = false,
+      active = true,
       createAt = new Date(),
       endAt,
       prize,
@@ -21,6 +21,8 @@ export class CreateRaffleDto {
     let activeBoolean = active;
 
     if (!name) return ["Missing name"];
+    if (!description) return ["Missing description"];
+    
     if (typeof active !== "boolean") {
       activeBoolean = active === "true";
     }

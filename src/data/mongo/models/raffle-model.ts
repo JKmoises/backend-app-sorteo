@@ -8,6 +8,7 @@ const raffleSchema = new mongoose.Schema({
   },
   description: {
     type: String,
+    required: [true, "Description is required"],
   },
   createAt: {
     type: Date,
@@ -26,10 +27,13 @@ const raffleSchema = new mongoose.Schema({
     ref: "Prize",
     required: [true, "Prize is required"],
   },
-  users: [{
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  }],
+  users: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "User is required"],
+    },
+  ],
 });
 
 raffleSchema.set("toJSON", {

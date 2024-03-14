@@ -23,5 +23,4 @@ prizeSchema.set("toJSON", {
   },
 });
 
-//* Definimos el modelo de la colección de categorias
 export const PrizeModel = mongoose.model("Prize", prizeSchema);

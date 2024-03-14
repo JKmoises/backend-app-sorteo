@@ -17,16 +17,32 @@ import { seedData } from "./data";
   await MongoDatabase.disconnect();
 })();
 
+const randomBeetween0AndX = (x: number) => {
+  return Math.floor(Math.random() * x);
+};
+
 async function main() {
 
   await Promise.all([
     UserModel.deleteMany(),
     RaffleModel.deleteMany(),
     PrizeModel.deleteMany(),
+  ]);
+
+
+  const [users,prizes] = await Promise.all([
     UserModel.insertMany(seedData.users),
-    RaffleModel.insertMany(seedData.raffles),
     PrizeModel.insertMany(seedData.prizes),
   ]);
+
+  await RaffleModel.insertMany(
+    seedData.raffles.map((raffle) => ({
+      ...raffle,
+      prize: prizes[randomBeetween0AndX(prizes.length)]._id,
+      users: [users[randomBeetween0AndX(users.length)]._id],
+    
+    }))
+  ),
 
   console.log("SEEDED");
 }

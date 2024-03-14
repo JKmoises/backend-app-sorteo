@@ -21,8 +21,8 @@ export class RaffleController {
   };
 
   getRaflleById = (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) return res.status(400).json({ error: "Invalid id" });
+    const id = req.params.id;
+    if (!id) return res.status(400).json({ error: "Invalid id" });
 
     this.raffleService
       .findById(id)
@@ -44,8 +44,8 @@ export class RaffleController {
   };
 
   updateRaffle = (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) return res.status(400).json({ error: "Invalid id" });
+    const id = req.params.id;
+    if (!id) return res.status(400).json({ error: "Invalid id" });
 
     const [error, updateRaffleDto] = UpdateRaffleDto.create({
       ...req.body,
@@ -60,8 +60,8 @@ export class RaffleController {
   };
 
   deleteRaffle = (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) return res.status(400).json({ error: "Invalid id" });
+    const id = req.params.id;
+    if (!id) return res.status(400).json({ error: "Invalid id" });
 
     this.raffleService
       .deleteById(id)

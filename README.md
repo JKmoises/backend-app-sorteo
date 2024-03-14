@@ -12,7 +12,7 @@ Los pasos importantes para que nuestro backend funcione son agregar las variable
 
 #### Montar base de datos MongoDB:
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 #### Poblar base de datos con datos de prueba:
@@ -60,7 +60,7 @@ http://localhost:3000/api
 ### Autenticación:
 
 - #### **Registrar usuario:**
-  POST - ```/api/auth/login``` 
+  POST - ```/api/auth/register``` 
   
   ##### Request Body:
   ```
@@ -72,7 +72,7 @@ http://localhost:3000/api
   ```
 
 - #### **Autenticar usuario:**
-  POST - ```/api/auth/register```
+  POST - ```/api/auth/login```
 
   ##### Request Body:
   ```
@@ -108,9 +108,8 @@ http://localhost:3000/api
   {
     name: string,
     description: string,
-    active: boolean,
-    createAt: Date,
-    endAt: Date,
+    createAt: string,
+    endAt: string,
     prize: string (mongoId),
   }
   ```
@@ -123,7 +122,7 @@ http://localhost:3000/api
   {
     name: string,
     description: string,
-    endAt: Date,
+    endAt: string,
     prize: string (mongoId),
   }
   ```

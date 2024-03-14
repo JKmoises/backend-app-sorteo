@@ -35,8 +35,8 @@ export const seedData = {
   ],
   raffles: [
     {
-      name: "Rifa 1",
-      description: "Rifa 1",
+      name: "!Sorteo de Programadores",
+      description: `¡Participa en nuestro emocionante sorteo de programación y tienes la oportunidad de ganar cursos gratuitos que te ayudarán a dominar diversas tecnologías de programación y herramientas exclusivas que potenciarán tu desarrollo como programador!`,
       endAt: new Date(),
     },
     {
@@ -62,8 +62,8 @@ export const seedData = {
   ],
   prizes: [
     {
-      name: "Premio 1",
-      description: "Premio 1",
+      name: "Cursos HTML5,CSS3,etc",
+      description: `¡Participa en nuestro sorteo y podrías ganar cursos gratuitos de HTML5, CSS3, Python y más! Impulsa tu carrera como programador con herramientas exclusivas para tu desarrollo profesional.`,
     },
     {
       name: "Premio 2",

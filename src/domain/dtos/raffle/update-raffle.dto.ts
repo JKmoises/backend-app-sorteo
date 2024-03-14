@@ -17,6 +17,8 @@ export class UpdateRaffleDto {
     } = object;
 
     if (!name) return ["Missing name"];
+    if (!description) return ["Missing description"];
+    
     if (!endAt) return ["Missing end date"];
 
     if (!prize) return ["Missing prize"];

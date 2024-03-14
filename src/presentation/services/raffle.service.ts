@@ -4,26 +4,20 @@ import { CreateRaffleDto, CustomError, UpdateRaffleDto } from "../../domain";
 export class RaffleService {
   public async getAll() {
     try {
-      const [nroUsers, raffles] = await Promise.all([
-        RaffleModel.countDocuments(),
-        RaffleModel.find()
-          .populate("prize")
-          .populate("user", ["name", "email", "emailValidated", "role"]),
-      ]);
+      const raffles = await RaffleModel.find()
+        .populate("prize")
+        .populate("users", ["name", "email", "emailValidated", "role"])
 
-      return {
-        raffles,
-        nroUsers,
-      };
+      return raffles;
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }
   }
 
-  public async findById(id: number) {
+  public async findById(id: string) {
     const raffle = await RaffleModel.findById(id)
-      .populate("prize")
-      .populate("user", ["name", "email", "emailValidated", "role"]);
+      .populate("prize",[ "name", "description", "id"])
+      .populate("users", ["name", "email", "emailValidated", "role"]);
 
     if (!raffle) throw CustomError.notFound(`Raffle with id ${id} not found`);
 
@@ -48,7 +42,7 @@ export class RaffleService {
     }
   }
 
-  public async updateById(id: number, updateRaffleDto: UpdateRaffleDto) {
+  public async updateById(id: string, updateRaffleDto: UpdateRaffleDto) {
     
     try {
       await this.findById(id);
@@ -65,7 +59,7 @@ export class RaffleService {
     }
   }
 
-  public async deleteById(id: number) {
+  public async deleteById(id: string) {
     try {
       await this.findById(id);
       
