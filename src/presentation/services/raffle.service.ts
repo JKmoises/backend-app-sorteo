@@ -79,9 +79,7 @@ export class RaffleService {
       if (!raffle) throw CustomError.notFound(`Raffle with id ${raffleId} not found`);
       if (raffle.users.includes(userIdObj)) throw CustomError.badRequest("User already in raffle");
       
-      console.log(userIdObj);
       raffle.users.push(userIdObj);
-      console.log(raffle);
 
       await raffle.save();
 

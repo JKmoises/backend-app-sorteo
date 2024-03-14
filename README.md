@@ -137,6 +137,12 @@ ___
 
   #### Parametros:
   **id** (path): Id de sorteo a eliminar.
+  
+- #### **Agregar usuario a un sorteo:**
+  POST - ```/api/raffle/users/{id}```
+
+  #### Parametros:
+  **id** (path): Id de sorteo en donde se agregará el partipante.
 
 ___
 
