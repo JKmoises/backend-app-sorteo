@@ -22,7 +22,12 @@ export class Server {
   async start() {
     this.app.use(express.json()); // raw
     this.app.use(express.urlencoded({ extended: true })); // x-www-form-urlencoded
-    this.app.use(cors()); // cors
+    this.app.use(
+      cors({
+        origin: "http://localhost:3001",
+        credentials: true,
+      })
+    ); 
     
 
     //* Routes
