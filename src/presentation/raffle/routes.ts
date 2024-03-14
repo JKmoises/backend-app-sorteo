@@ -19,6 +19,12 @@ export class RaffleRoutes {
 
     router.delete("/:id", [AuthMiddleware.validateJWT], controller.deleteRaffle);
 
+    router.post(
+      "/users/:id",
+      [AuthMiddleware.validateJWT],
+      controller.createUserInRaffle
+    );
+
     return router;
   }
 }

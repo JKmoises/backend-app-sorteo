@@ -1,12 +1,13 @@
 import { RaffleModel } from "../../data";
 import { CreateRaffleDto, CustomError, UpdateRaffleDto } from "../../domain";
+import { Validators } from "../../config";
 
 export class RaffleService {
   public async getAll() {
     try {
       const raffles = await RaffleModel.find()
         .populate("prize")
-        .populate("users", ["name", "email", "emailValidated", "role"])
+        .populate("users",["name","email"]);
 
       return raffles;
     } catch (error) {
@@ -16,8 +17,8 @@ export class RaffleService {
 
   public async findById(id: string) {
     const raffle = await RaffleModel.findById(id)
-      .populate("prize",[ "name", "description", "id"])
-      .populate("users", ["name", "email", "emailValidated", "role"]);
+      .populate("prize", ["name", "description", "id"])
+      .populate("users", ["name", "email"]);
 
     if (!raffle) throw CustomError.notFound(`Raffle with id ${id} not found`);
 
@@ -43,7 +44,6 @@ export class RaffleService {
   }
 
   public async updateById(id: string, updateRaffleDto: UpdateRaffleDto) {
-    
     try {
       await this.findById(id);
 
@@ -62,10 +62,30 @@ export class RaffleService {
   public async deleteById(id: string) {
     try {
       await this.findById(id);
-      
+
       const deletedRaffle = await RaffleModel.findByIdAndDelete(id);
 
       return deletedRaffle;
+    } catch (error) {
+      throw CustomError.internalServer(`${error}`);
+    }
+  }
+
+  public async createUserInRaffle(raffleId: string, userId: string) {
+    try {
+      const userIdObj = Validators.mongoId(userId);
+      const raffle = await RaffleModel.findById(raffleId);
+      
+      if (!raffle) throw CustomError.notFound(`Raffle with id ${raffleId} not found`);
+      if (raffle.users.includes(userIdObj)) throw CustomError.badRequest("User already in raffle");
+      
+      console.log(userIdObj);
+      raffle.users.push(userIdObj);
+      console.log(raffle);
+
+      await raffle.save();
+
+      return raffle;
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }

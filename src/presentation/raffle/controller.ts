@@ -68,4 +68,16 @@ export class RaffleController {
       .then((raffle) => res.json(raffle))
       .catch((error) => this.handleError(error, res));
   };
+
+  createUserInRaffle = (req: Request, res: Response) => { 
+    const raffleId = req.params.id;
+    const userId = req.body.user.id;
+    
+    if (!raffleId) return res.status(400).json({ error: "Invalid id" });
+
+    this.raffleService
+      .createUserInRaffle(raffleId, userId)
+      .then((raffle) => res.json(raffle))
+      .catch((error) => this.handleError(error, res));
+  }
 }
