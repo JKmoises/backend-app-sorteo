@@ -88,12 +88,14 @@ http://localhost:3000/api
   #### Parametros:
   **token** (path): Token de usuario registrado.
 
+___
+
 ### Sorteo:
 
-- #### **Leer todos los sorteos:**
+- #### **Obtener todos los sorteos:**
   GET - ```/api/raffle/```
 
-- #### **Leer un sorteo:**
+- #### **Obtener un sorteo:**
   GET - ```/api/raffle/{id}```
 
   #### Parametros:
@@ -136,6 +138,11 @@ http://localhost:3000/api
   #### Parametros:
   **id** (path): Id de sorteo a eliminar.
 
+___
 
+### Premio:
+
+- #### **Obtener todos los premios:**
+  GET - ```/api/prize/```
 
 
