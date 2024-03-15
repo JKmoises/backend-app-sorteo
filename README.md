@@ -62,7 +62,7 @@ http://localhost:3000/api
 - #### **Registrar usuario:**
   POST - ```/api/auth/register``` 
   
-  ##### Request Body:
+  #### Request Body:
   ```
   {
     name: string,
@@ -74,7 +74,7 @@ http://localhost:3000/api
 - #### **Autenticar usuario:**
   POST - ```/api/auth/login```
 
-  ##### Request Body:
+  #### Request Body:
   ```
   {
     email: string,
@@ -86,7 +86,7 @@ http://localhost:3000/api
   GET - ```/api/auth/validate-email/{token}```
 
   #### Parametros:
-  **token** (path): Token de usuario registrado.
+  - **token** (path): Token de usuario registrado.
 
 ___
 
@@ -99,13 +99,13 @@ ___
   GET - ```/api/raffle/{id}```
 
   #### Parametros:
-  **id** (path): Id de sorteo a mostrar.
+  - **id** (path): Id de sorteo a mostrar.
 
 
 - #### **Crear un sorteo:**
   POST - ```/api/raffle/```
 
-  ##### Request Body:
+  #### Request Body:
   ```
   {
     name: string,
@@ -119,7 +119,7 @@ ___
 - #### **Actualizar un sorteo:**
   PUT - ```/api/raffle/{id}```
 
-  ##### Request Body:
+  #### Request Body:
    ```
   {
     name: string,
@@ -128,22 +128,30 @@ ___
     prize: string (mongoId),
   }
   ```
-
   #### Parametros:
-  **id** (path): Id de sorteo a actualizar.
+  - **id** (path): Id de sorteo a actualizar.
+
 
 - #### **Eliminar un sorteo:**
   DELETE - ```/api/raffle/{id}```
 
   #### Parametros:
-  **id** (path): Id de sorteo a eliminar.
+  - **id** (path): Id de sorteo a eliminar.
   
+
 - #### **Agregar usuario a un sorteo:**
   POST - ```/api/raffle/users/{id}```
 
   #### Parametros:
-  **id** (path): Id de sorteo en donde se agregará el partipante.
+  - **id** (path): Id de sorteo en donde se agregará el partipante.
 
+
+- #### **Actualizar usuario a ganador en un sorteo:**
+  PUT - ```/api/raffle/winner/{id}/{userid}```
+
+  #### Parametros:
+  - **id** (path): Id de sorteo a donde elegir un ganador.
+  - **userid** (path): Id de usuario a actualizar como ganador.
 ___
 
 ### Premio:

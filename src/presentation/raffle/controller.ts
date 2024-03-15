@@ -28,7 +28,7 @@ export class RaffleController {
       .findById(id)
       .then((raffle) => res.json(raffle))
       .catch((error) => this.handleError(error, res));
-  }
+  };
 
   createRaffle = (req: Request, res: Response) => {
     const [error, createRaffleDto] = CreateRaffleDto.create({
@@ -69,14 +69,28 @@ export class RaffleController {
       .catch((error) => this.handleError(error, res));
   };
 
-  createUserInRaffle = (req: Request, res: Response) => { 
+  createUserInRaffle = (req: Request, res: Response) => {
     const raffleId = req.params.id;
     const userId = req.body.user.id;
-    
+
     if (!raffleId) return res.status(400).json({ error: "Invalid id" });
 
     this.raffleService
       .createUserInRaffle(raffleId, userId)
+      .then((raffle) => res.json(raffle))
+      .catch((error) => this.handleError(error, res));
+  };
+
+  markUserAsWinner = (req: Request, res: Response) => {
+    const raffleId = req.params.id;
+    const userId = req.params.userid;
+
+    if (!raffleId) return res.status(400).json({ error: "Invalid raffle id " });
+    if (!userId) return res.status(400).json({ error: "Invalid user id " });
+    
+
+    this.raffleService
+      .updateUserAsWinner(raffleId, userId)
       .then((raffle) => res.json(raffle))
       .catch((error) => this.handleError(error, res));
   }

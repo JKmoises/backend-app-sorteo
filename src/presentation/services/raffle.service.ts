@@ -1,4 +1,4 @@
-import { RaffleModel } from "../../data";
+import { RaffleModel, UserModel } from "../../data";
 import { CreateRaffleDto, CustomError, UpdateRaffleDto } from "../../domain";
 import { Validators } from "../../config";
 
@@ -18,7 +18,7 @@ export class RaffleService {
   public async findById(id: string) {
     const raffle = await RaffleModel.findById(id)
       .populate("prize", ["name", "description", "id"])
-      .populate("users", ["name", "email"]);
+      .populate("users", ["name", "email","winner"]);
 
     if (!raffle) throw CustomError.notFound(`Raffle with id ${id} not found`);
 
@@ -84,6 +84,26 @@ export class RaffleService {
       await raffle.save();
 
       return raffle;
+    } catch (error) {
+      throw CustomError.internalServer(`${error}`);
+    }
+  }
+
+  public async updateUserAsWinner(raffleId: string, userId: string) {
+    try {
+      const userIdObj = Validators.mongoId(userId);
+
+      const raffle = await this.findById(raffleId);
+      const existUser = raffle.users.some((user) => user._id.toString() === userId);
+      if (!existUser) throw CustomError.badRequest("User not exists in raffle");
+
+      raffle.winner = userIdObj;
+      await raffle.save();
+
+      return {
+        winner: true,
+        userId: userIdObj
+      };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }

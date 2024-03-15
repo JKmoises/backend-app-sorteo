@@ -34,6 +34,10 @@ const raffleSchema = new mongoose.Schema({
       required: [true, "User is required"],
     },
   ],
+  winner: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  }
 });
 
 raffleSchema.set("toJSON", {

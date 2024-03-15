@@ -25,6 +25,9 @@ export class RaffleRoutes {
       controller.createUserInRaffle
     );
 
+    router.put("/winner/:id/:userid", [AuthMiddleware.validateJWT], controller.markUserAsWinner);
+
+
     return router;
   }
 }
