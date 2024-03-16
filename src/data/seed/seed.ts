@@ -1,10 +1,9 @@
 import { envs } from "../../config";
-import { PrizeModel } from "../mongo/models/prize-model";
-import { RaffleModel } from "../mongo/models/raffle-model";
+import { PrizeModel } from "../mongo/models/prize.model";
+import { RaffleModel } from "../mongo/models/raffle.model";
 import { UserModel } from "../mongo/models/user.model";
 import { MongoDatabase } from "../mongo/mongo-database";
 import { seedData } from "./data";
-
 
 (async () => {
   await MongoDatabase.connect({
@@ -22,15 +21,13 @@ const randomBeetween0AndX = (x: number) => {
 };
 
 async function main() {
-
   await Promise.all([
     UserModel.deleteMany(),
     RaffleModel.deleteMany(),
     PrizeModel.deleteMany(),
   ]);
 
-
-  const [users,prizes] = await Promise.all([
+  const [users, prizes] = await Promise.all([
     UserModel.insertMany(seedData.users),
     PrizeModel.insertMany(seedData.prizes),
   ]);
@@ -48,5 +45,3 @@ async function main() {
   ),
     console.log("SEEDED");
 }
-
-

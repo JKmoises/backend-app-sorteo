@@ -20,6 +20,13 @@ export class RaffleController {
       .catch((error) => this.handleError(error, res));
   };
 
+  getLatestRaffle = (req: Request, res: Response) => {
+    this.raffleService
+      .getLatestRaffle()
+      .then((raffle) => res.json(raffle))
+      .catch((error) => this.handleError(error, res));
+  };
+
   getRaflleById = (req: Request, res: Response) => {
     const id = req.params.id;
     if (!id) return res.status(400).json({ error: "Invalid id" });
@@ -87,11 +94,10 @@ export class RaffleController {
 
     if (!raffleId) return res.status(400).json({ error: "Invalid raffle id " });
     if (!userId) return res.status(400).json({ error: "Invalid user id " });
-    
 
     this.raffleService
       .updateUserAsWinner(raffleId, userId)
       .then((raffle) => res.json(raffle))
       .catch((error) => this.handleError(error, res));
-  }
+  };
 }

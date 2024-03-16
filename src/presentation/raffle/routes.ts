@@ -12,20 +12,22 @@ export class RaffleRoutes {
 
     // Definir rutas
     router.get("/",[AuthMiddleware.validateJWT], controller.getRaffles);
-    router.get("/:id", [AuthMiddleware.validateJWT],controller.getRaflleById);
+    router.get("/latest", [AuthMiddleware.validateJWT], controller.getLatestRaffle);
+    router.get("/:id", [AuthMiddleware.validateJWT], controller.getRaflleById);
 
     router.post("/", [AuthMiddleware.validateJWT], controller.createRaffle);
-    router.put("/:id", [AuthMiddleware.validateJWT], controller.updateRaffle);
-
-    router.delete("/:id", [AuthMiddleware.validateJWT], controller.deleteRaffle);
-
     router.post(
       "/users/:id",
       [AuthMiddleware.validateJWT],
       controller.createUserInRaffle
     );
 
+    router.put("/:id", [AuthMiddleware.validateJWT], controller.updateRaffle);
     router.put("/winner/:id/:userid", [AuthMiddleware.validateJWT], controller.markUserAsWinner);
+
+    router.delete("/:id", [AuthMiddleware.validateJWT], controller.deleteRaffle);
+
+
 
 
     return router;

@@ -4,7 +4,6 @@ const raffleSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Name is required"],
-    unique: true,
   },
   description: {
     type: String,
@@ -12,7 +11,9 @@ const raffleSchema = new mongoose.Schema({
   },
   createAt: {
     type: Date,
-    default: Date.now,
+    required: [true, "Create date is required"],
+    unique: true,
+    timestamps: true,
   },
   endAt: {
     type: Date,
@@ -37,7 +38,7 @@ const raffleSchema = new mongoose.Schema({
   winner: {
     type: Schema.Types.ObjectId,
     ref: "User",
-  }
+  },
 });
 
 raffleSchema.set("toJSON", {

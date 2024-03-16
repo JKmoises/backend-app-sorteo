@@ -7,9 +7,30 @@ export class RaffleService {
     try {
       const raffles = await RaffleModel.find()
         .populate("prize")
-        .populate("users",["name","email"]);
+        .populate("users", ["name", "email"]);
 
       return raffles;
+    } catch (error) {
+      throw CustomError.internalServer(`${error}`);
+    }
+  }
+
+  public async getLatestRaffle() {
+    try {
+      const raffle = await RaffleModel.findOne().sort({ createAt: -1 })
+        .populate("prize", ["name", "description", "id"])
+      
+      if (!raffle) throw CustomError.notFound("Raffle not found");
+
+      return {
+        id: raffle.id,
+        name: raffle.name,
+        description: raffle.description,
+        prize: raffle.prize,
+        createAt: raffle.createAt,
+        endAt: raffle.endAt,
+      
+      };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }
@@ -18,7 +39,7 @@ export class RaffleService {
   public async findById(id: string) {
     const raffle = await RaffleModel.findById(id)
       .populate("prize", ["name", "description", "id"])
-      .populate("users", ["name", "email","winner"]);
+      .populate("users", ["name", "email", "winner"]);
 
     if (!raffle) throw CustomError.notFound(`Raffle with id ${id} not found`);
 
@@ -26,18 +47,31 @@ export class RaffleService {
   }
 
   public async create(createRaffleDto: CreateRaffleDto) {
+    const startOfDay = Validators.startDay(createRaffleDto.createAt);
+    const endOfDay = Validators.endDay(createRaffleDto.createAt);
+
     const raffleExists = await RaffleModel.findOne({
-      name: createRaffleDto.name,
+      createAt: {
+        $gte: startOfDay,
+        $lte: endOfDay,
+      },
     });
 
-    if (raffleExists) throw CustomError.badRequest("Raffle already exists");
+    if (raffleExists) throw CustomError.badRequest("El sorteo ya existe con la fecha de inicio");
 
     try {
       const raffle = new RaffleModel(createRaffleDto);
 
       await raffle.save();
 
-      return raffle;
+      return {
+        id: raffle.id,
+        name: raffle.name,
+        description: raffle.description,
+        prize: raffle.prize,
+        createAt: raffle.createAt,
+        endAt: raffle.endAt,
+      };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }
@@ -75,10 +109,12 @@ export class RaffleService {
     try {
       const userIdObj = Validators.mongoId(userId);
       const raffle = await RaffleModel.findById(raffleId);
-      
-      if (!raffle) throw CustomError.notFound(`Raffle with id ${raffleId} not found`);
-      if (raffle.users.includes(userIdObj)) throw CustomError.badRequest("User already in raffle");
-      
+
+      if (!raffle)
+        throw CustomError.notFound(`Raffle with id ${raffleId} not found`);
+      if (raffle.users.includes(userIdObj))
+        throw CustomError.badRequest("User already in raffle");
+
       raffle.users.push(userIdObj);
 
       await raffle.save();
@@ -94,15 +130,18 @@ export class RaffleService {
       const userIdObj = Validators.mongoId(userId);
 
       const raffle = await this.findById(raffleId);
-      const existUser = raffle.users.some((user) => user._id.toString() === userId);
-      if (!existUser) throw CustomError.badRequest("User not exists in raffle");
+      const existUser = raffle.users.some(
+        (user) => user._id.toString() === userId
+      );
+      if (!existUser)
+        throw CustomError.badRequest("El usuario no existe en el sorteo");
 
       raffle.winner = userIdObj;
       await raffle.save();
 
       return {
         winner: true,
-        userId: userIdObj
+        userId: userIdObj,
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);

@@ -20,16 +20,18 @@ export class CreateRaffleDto {
     } = object;
     let activeBoolean = active;
 
-    if (!name) return ["Missing name"];
-    if (!description) return ["Missing description"];
+    if (!name) return ["El nombre es requerido"];
+    if (!description) return ["La descripción es requerida"];
     
     if (typeof active !== "boolean") {
       activeBoolean = active === "true";
     }
-    if (!endAt) return ["Missing end date"];
 
-    if (!prize) return ["Missing prize"];
-    if(!Validators.isMongoID(prize)) return ["Invalid prize ID"];
+    if(!createAt) return ["La fecha de inicio es requerida"];
+    if (!endAt) return ["La fecha de finalización es requerida"];
+
+    if (!prize) return ["El premio es requerido"];
+    if(!Validators.isMongoID(prize)) return ["ID de premio inválido"];
 
 
     return [

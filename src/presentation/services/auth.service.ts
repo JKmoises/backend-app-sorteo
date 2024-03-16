@@ -81,7 +81,7 @@ export class AuthService {
     };
 
     const isSent = await this.emailService.sendEmail(options);
-    if (!isSent) throw CustomError.internalServer("Error al enviar email email");
+    if (!isSent) throw CustomError.internalServer("Error al enviar email");
 
     return true;
   };

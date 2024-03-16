@@ -81,19 +81,15 @@ http://localhost:3000/api
     password: string
   }
   ```
-
-- #### **Validar email de usuario:**
-  GET - ```/api/auth/validate-email/{token}```
-
-  #### Parametros:
-  - **token** (path): Token de usuario registrado.
-
 ___
 
 ### Sorteo:
 
 - #### **Obtener todos los sorteos:**
   GET - ```/api/raffle/```
+
+- #### **Obtener último sorteo:**
+  GET - ```/api/raffle/latest```
 
 - #### **Obtener un sorteo:**
   GET - ```/api/raffle/{id}```
