@@ -25,15 +25,6 @@ npm run seed
 npm run dev
 ```
 
-#### Ejecutar pruebas unitarias:
-##### Sin hot reload:
-```
-npm run test
-```
-##### Con hot reload:
-```
-npm run test:watch
-```
 
 ___
 
@@ -47,29 +38,18 @@ Para el desarrollo backend se usaron principalmente las siguientes tecnologías:
 - **Docker:** Gestor de contenedores para montar base de datos de _Mongo_.
 - **Jest:** Biblioteca para _Unit testing_ en nuestro backend.
 
-![Tecnologias](https://skillicons.dev/icons?i=nodejs,express,typescript,mongodb,docker,jest)
+![Tecnologias](https://skillicons.dev/icons?i=nodejs,express,typescript,mongodb,docker)
 
 ___
 
 ## Endpoints:
 El endpoint base en nuestro servidor local es: 
 ```
-http://localhost:3000/api
+http://localhost:3000
 ```
 
 ### Autenticación:
 
-- #### **Registrar usuario:**
-  POST - ```/api/auth/register``` 
-  
-  #### Request Body:
-  ```
-  {
-    name: string,
-    email: string,
-    password: string
-  }
-  ```
 
 - #### **Autenticar usuario:**
   POST - ```/api/auth/login```
