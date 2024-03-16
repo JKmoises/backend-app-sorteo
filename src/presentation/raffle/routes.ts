@@ -12,7 +12,7 @@ export class RaffleRoutes {
 
     // Definir rutas
     router.get("/",[AuthMiddleware.validateJWT], controller.getRaffles);
-    router.get("/latest", [AuthMiddleware.validateJWT], controller.getLatestRaffle);
+    router.get("/latest", controller.getLatestRaffle);
     router.get("/:id", [AuthMiddleware.validateJWT], controller.getRaflleById);
 
     router.post("/", [AuthMiddleware.validateJWT], controller.createRaffle);

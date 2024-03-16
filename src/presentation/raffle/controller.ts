@@ -96,7 +96,7 @@ export class RaffleController {
     if (!userId) return res.status(400).json({ error: "Invalid user id " });
 
     this.raffleService
-      .updateUserAsWinner(raffleId, userId)
+      .toggleUserAsWinner(raffleId, userId)
       .then((raffle) => res.json(raffle))
       .catch((error) => this.handleError(error, res));
   };

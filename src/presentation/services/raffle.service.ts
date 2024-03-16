@@ -106,15 +106,13 @@ export class RaffleService {
   }
 
   public async createUserInRaffle(raffleId: string, userId: string) {
+    const userIdObj = Validators.mongoId(userId);
+    const raffle = await RaffleModel.findById(raffleId);
+
+    if (!raffle) throw CustomError.notFound(`Raffle with id ${raffleId} not found`);
+    if (raffle.users.includes(userIdObj)) throw CustomError.badRequest("User already in raffle");
+
     try {
-      const userIdObj = Validators.mongoId(userId);
-      const raffle = await RaffleModel.findById(raffleId);
-
-      if (!raffle)
-        throw CustomError.notFound(`Raffle with id ${raffleId} not found`);
-      if (raffle.users.includes(userIdObj))
-        throw CustomError.badRequest("User already in raffle");
-
       raffle.users.push(userIdObj);
 
       await raffle.save();
@@ -125,23 +123,26 @@ export class RaffleService {
     }
   }
 
-  public async updateUserAsWinner(raffleId: string, userId: string) {
+  public async toggleUserAsWinner(raffleId: string, userId: string) {
+    const userIdObj = Validators.mongoId(userId);
+    const raffle = await this.findById(raffleId);
+
+    const existUser = raffle.users.some((user) => user._id.toString() === userId);
+    if (!existUser) throw CustomError.badRequest("El usuario no existe en el sorteo");
     try {
-      const userIdObj = Validators.mongoId(userId);
-
-      const raffle = await this.findById(raffleId);
-      const existUser = raffle.users.some(
-        (user) => user._id.toString() === userId
-      );
-      if (!existUser)
-        throw CustomError.badRequest("El usuario no existe en el sorteo");
-
-      raffle.winner = userIdObj;
+      
+      if (raffle.winner && raffle.winner.toString() === userId) {
+        raffle.winner = null;
+        console.log({ winner: raffle.winner});
+      } else {
+        raffle.winner = userIdObj;
+        console.log({ winner: raffle.winner});
+      }
+      
       await raffle.save();
 
       return {
-        winner: true,
-        userId: userIdObj,
+        winner: Boolean(raffle.winner),
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
