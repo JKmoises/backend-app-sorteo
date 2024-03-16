@@ -14,7 +14,7 @@ export class AuthService {
 
   public async registerUser(registerUserDto: RegisterUserDto) {
     const existUser = await UserModel.findOne({ email: registerUserDto.email });
-    if (existUser) throw CustomError.badRequest("Email already exists");
+    if (existUser) throw CustomError.badRequest("El email ya existe");
 
     try {
       const user = new UserModel(registerUserDto);
@@ -44,13 +44,13 @@ export class AuthService {
 
   public async loginUser(loginUserDto: LoginUserDto) {
     const user = await UserModel.findOne({ email: loginUserDto.email });
-    if (!user) throw CustomError.badRequest("Email not exist");
+    if (!user) throw CustomError.badRequest("El email no existe");
 
     const isMatching = BcryptAdapter.compare(
       loginUserDto.password,
       user.password!
     );
-    if (!isMatching) throw CustomError.badRequest("Password is not valid");
+    if (!isMatching) throw CustomError.badRequest("El password es invalido");
 
     const { password, ...userEntity } = UserEntity.fromObject(user);
 
@@ -81,7 +81,7 @@ export class AuthService {
     };
 
     const isSent = await this.emailService.sendEmail(options);
-    if (!isSent) throw CustomError.internalServer("Error sending email");
+    if (!isSent) throw CustomError.internalServer("Error al enviar email email");
 
     return true;
   };
