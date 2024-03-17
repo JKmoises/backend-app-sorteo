@@ -36,7 +36,6 @@ Para el desarrollo backend se usaron principalmente las siguientes tecnologías:
 - **Typescript:** Superset de _Javascript_ para tipado estático.
 - **MongoDB:** Base de datos NoSQL.
 - **Docker:** Gestor de contenedores para montar base de datos de _Mongo_.
-- **Jest:** Biblioteca para _Unit testing_ en nuestro backend.
 
 ![Tecnologias](https://skillicons.dev/icons?i=nodejs,express,typescript,mongodb,docker)
 

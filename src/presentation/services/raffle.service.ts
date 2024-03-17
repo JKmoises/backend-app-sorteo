@@ -142,6 +142,7 @@ export class RaffleService {
 
       return {
         winner: Boolean(raffle.winner),
+        userId: raffle.winner,
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
