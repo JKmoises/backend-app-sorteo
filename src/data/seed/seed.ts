@@ -37,9 +37,9 @@ async function main() {
       ...raffle,
       prize: prizes[randomBeetween0AndX(prizes.length)]._id,
       users: [
-        users[randomBeetween0AndX(users.length)]._id,
-        users[randomBeetween0AndX(users.length)]._id,
-        users[randomBeetween0AndX(users.length)]._id,
+        users[2]._id,
+        users[3]._id,
+        users[4]._id,
       ],
     }))
   ),

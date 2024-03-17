@@ -48,26 +48,30 @@ export const seedData = {
       endAt: new Date("2024-03-26"),
     },
     {
-      name: "Sorteo 2",
-      description: "Sorteo 2",
+      name: "Sorteo de Verano",
+      description:
+        "¡Participa en nuestro sorteo especial de verano y gana grandes premios!",
       createAt: new Date("2024-03-01"),
       endAt: new Date(),
     },
     {
-      name: "Sorteo 3",
-      description: "Sorteo 3",
+      name: "Gran Sorteo de Navidad",
+      description:
+        "¡Celebra la temporada navideña participando en nuestro gran sorteo!",
       createAt: new Date("2024-03-04"),
       endAt: new Date(),
     },
     {
-      name: "Sorteo 4",
-      description: "Sorteo 4",
+      name: "Sorteo de Cumpleaños de la Empresa",
+      description:
+        "¡Celebra nuestro aniversario participando en nuestro sorteo especial!",
       createAt: new Date("2024-03-05"),
       endAt: new Date(),
     },
     {
-      name: "Sorteo 5",
-      description: "Sorteo 5",
+      name: "Sorteo de Primavera",
+      description:
+        "¡Da la bienvenida a la primavera participando en nuestro sorteo especial!",
       createAt: new Date("2024-03-06"),
       endAt: new Date(),
     },
@@ -78,20 +82,24 @@ export const seedData = {
       description: `¡Participa en nuestro sorteo y podrías ganar cursos gratuitos de HTML5, CSS3, Python y más! Impulsa tu carrera como programador con herramientas exclusivas para tu desarrollo profesional.`,
     },
     {
-      name: "Premio 2",
-      description: "Premio 2",
+      name: "Tarjeta de Regalo",
+      description:
+        "Una tarjeta de regalo de $100 para compras en cualquier tienda asociada.",
     },
     {
-      name: "Premio 3",
-      description: "Premio 3",
+      name: "Paquete de Vacaciones",
+      description:
+        "Un paquete todo incluido para dos personas a un destino sorpresa.",
     },
     {
-      name: "Premio 4",
-      description: "Premio 4",
+      name: "Cena de Lujo",
+      description:
+        "Una cena de lujo para dos personas en el restaurante más exclusivo de la ciudad.",
     },
     {
-      name: "Premio 5",
-      description: "Premio 5",
+      name: "Vale de Compras",
+      description:
+        "Un vale de compras de $50 para gastar en nuestra tienda en línea.",
     },
   ],
 };

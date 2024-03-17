@@ -7,7 +7,6 @@ export class PrizeService {
   public async getAll() {
     try {
       const raffles = await PrizeModel.find()
-      console.log(raffles);
         
 
       return raffles;

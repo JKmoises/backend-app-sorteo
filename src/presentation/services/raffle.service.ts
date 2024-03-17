@@ -40,6 +40,7 @@ export class RaffleService {
     const raffle = await RaffleModel.findById(id)
       .populate("prize", ["name", "description", "id"])
       .populate("users", ["name", "email", "winner"]);
+    
 
     if (!raffle) throw CustomError.notFound(`Raffle with id ${id} not found`);
 
@@ -133,10 +134,8 @@ export class RaffleService {
       
       if (raffle.winner && raffle.winner.toString() === userId) {
         raffle.winner = null;
-        console.log({ winner: raffle.winner});
       } else {
         raffle.winner = userIdObj;
-        console.log({ winner: raffle.winner});
       }
       
       await raffle.save();
