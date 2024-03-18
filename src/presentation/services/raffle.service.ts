@@ -79,8 +79,21 @@ export class RaffleService {
   }
 
   public async updateById(id: string, updateRaffleDto: UpdateRaffleDto) {
+    await this.findById(id);
+
+    const startOfDay = Validators.startDay(updateRaffleDto.createAt);
+    const endOfDay = Validators.endDay(updateRaffleDto.createAt);
+
+    const raffleExists = await RaffleModel.findOne({
+      createAt: {
+        $gte: startOfDay,
+        $lte: endOfDay,
+      },
+    });
+
+    if (raffleExists) throw CustomError.badRequest("El sorteo ya existe con la fecha de inicio");
+
     try {
-      await this.findById(id);
 
       const updatedRaffle = await RaffleModel.findByIdAndUpdate(
         id,
@@ -111,7 +124,7 @@ export class RaffleService {
     const raffle = await RaffleModel.findById(raffleId);
 
     if (!raffle) throw CustomError.notFound(`Raffle with id ${raffleId} not found`);
-    if (raffle.users.includes(userIdObj)) throw CustomError.badRequest("User already in raffle");
+    if (raffle.users.includes(userIdObj)) throw CustomError.badRequest("¡Ya estas participando, suerte en el sorteo!");
 
     try {
       raffle.users.push(userIdObj);

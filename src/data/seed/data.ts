@@ -43,8 +43,8 @@ export const seedData = {
   raffles: [
     {
       name: "!Sorteo de Programadores",
-      description: `¡Participa en nuestro emocionante sorteo de programación y tienes la oportunidad de ganar cursos gratuitos que te ayudarán a dominar diversas tecnologías de programación y herramientas exclusivas que potenciarán tu desarrollo como programador!`,
-      createAt: new Date("2024-03-16"),
+      description: `¡Participa en nuestro emocionante sorteo de programación y tienes la oportunidad de ganar cursos gratuitos y herramientas exclusivas que potenciarán tu desarrollo como programador!`,
+      createAt: new Date("2024-03-17"),
       endAt: new Date("2024-03-26"),
     },
     {

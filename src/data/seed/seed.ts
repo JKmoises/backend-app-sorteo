@@ -36,11 +36,6 @@ async function main() {
     seedData.raffles.map((raffle) => ({
       ...raffle,
       prize: prizes[randomBeetween0AndX(prizes.length)]._id,
-      users: [
-        users[2]._id,
-        users[3]._id,
-        users[4]._id,
-      ],
     }))
   ),
     console.log("SEEDED");

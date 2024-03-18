@@ -29,13 +29,14 @@ npm run dev
 ___
 
 ## Tecnologías:
-Para el desarrollo backend se usaron principalmente las siguientes tecnologías:
+Para el desarrollo backend se usaron principalmente las siguientes tecnologías y enfoques:
 
 - **NodeJS:** Entorno de ejecución para crear nuestro backend.
 - **Express:** Framework de _NodeJS_.
 - **Typescript:** Superset de _Javascript_ para tipado estático.
 - **MongoDB:** Base de datos NoSQL.
 - **Docker:** Gestor de contenedores para montar base de datos de _Mongo_.
+- **Arquitectura limpia:** Patrón de diseño de software para organizar el código en capas bien definidas.
 
 ![Tecnologias](https://skillicons.dev/icons?i=nodejs,express,typescript,mongodb,docker)
 
