@@ -8,7 +8,6 @@ export class PrizeService {
     try {
       const raffles = await PrizeModel.find()
         
-
       return raffles;
     } catch (error) {
       throw CustomError.internalServer(`${error}`);

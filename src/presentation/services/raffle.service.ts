@@ -66,12 +66,7 @@ export class RaffleService {
       await raffle.save();
 
       return {
-        id: raffle.id,
-        name: raffle.name,
-        description: raffle.description,
-        prize: raffle.prize,
-        createAt: raffle.createAt,
-        endAt: raffle.endAt,
+        message: "Sorteo creado exitosamente",
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
@@ -101,7 +96,9 @@ export class RaffleService {
         { new: true }
       );
 
-      return updatedRaffle;
+      return {
+        message: "Sorteo actualizado exitosamente",
+      }
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }
@@ -113,7 +110,9 @@ export class RaffleService {
 
       const deletedRaffle = await RaffleModel.findByIdAndDelete(id);
 
-      return deletedRaffle;
+      return {
+        message: "Sorteo eliminado exitosamente",
+      }
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }
@@ -131,7 +130,9 @@ export class RaffleService {
 
       await raffle.save();
 
-      return raffle;
+      return {
+        message: "Participante agregado exitosamente",
+      }
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }
@@ -154,8 +155,7 @@ export class RaffleService {
       await raffle.save();
 
       return {
-        winner: Boolean(raffle.winner),
-        userId: raffle.winner,
+        message: "Se ha seleccionado un ganador exitosamente",
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);

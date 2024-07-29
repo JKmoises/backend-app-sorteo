@@ -34,8 +34,7 @@ export class AuthService {
       if (!token) throw CustomError.internalServer("Error while creating JWT");
 
       return {
-        user: userEntity,
-        token,
+        message: "Usuario creado con exito",
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
